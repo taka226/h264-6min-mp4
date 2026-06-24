@@ -37,40 +37,44 @@ No video re-encoding is performed. Image quality is therefore unchanged.
 
 ## Requirements
 
+- Miniconda, Anaconda, or Mambaforge
 - Python 3.10 or later
 - FFmpeg, including both `ffmpeg` and `ffprobe`
-- PySide6
-
-### macOS
-
-```bash
-brew install ffmpeg
-```
-
-### Ubuntu
-
-```bash
-sudo apt update
-sudo apt install ffmpeg
-```
 
 ## Installation
+
+Clone the repository:
 
 ```bash
 git clone https://github.com/YOUR_GITHUB_USERNAME/h264-6min-mp4.git
 cd h264-6min-mp4
+```
 
-python3 -m venv .venv
-source .venv/bin/activate
+Create and activate a Conda environment:
 
-python -m pip install --upgrade pip
+```bash
+conda create -n h264-6min-mp4 python=3.11 -y
+conda activate h264-6min-mp4
+```
+
+Install FFmpeg and PySide6:
+
+```bash
+conda install -c conda-forge ffmpeg pyside6 -y
 python -m pip install -r requirements.txt
+```
+
+Check that both command-line tools are visible:
+
+```bash
+ffmpeg -version
+ffprobe -version
 ```
 
 ## Run
 
 ```bash
-source .venv/bin/activate
+conda activate h264-6min-mp4
 python -m h264_6min_mp4.app
 ```
 
@@ -109,6 +113,8 @@ sampling rate changes. This does not recover dropped frames.
 ## Development validation
 
 ```bash
+conda activate h264-6min-mp4
+
 python -m py_compile \
   h264_6min_mp4/conversion_controller.py \
   h264_6min_mp4/settings_dialog.py \
